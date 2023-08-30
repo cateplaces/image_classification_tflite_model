@@ -21,7 +21,7 @@ st.markdown("---")
 # print(value)
 
 tflite_interpreter = tf.lite.Interpreter(model_path='Models/image_classify.tflite')
-    tflite_interpreter.allocate_tensors()
+tflite_interpreter.allocate_tensors()
  
 # if value == 1:
 #     tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_fp16.tflite')
