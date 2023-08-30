@@ -66,7 +66,8 @@ if uploaded_file is not None:
     img = tf.keras.preprocessing.image.load_img(path , grayscale=False, color_mode='rgb', target_size=(224,224,3), interpolation='nearest')
     st.image(img)
     print(value)
-    # if value == 2 or value == 5:
+    if value == 1 or value == 2 or value == 3:
+        value = 2
     #     img = tf.image.convert_image_dtype(img, tf.uint8)
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)
