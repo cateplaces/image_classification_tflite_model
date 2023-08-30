@@ -14,21 +14,24 @@ st.title("Image Classification")
 st.markdown("---")
  
 ## Sidebar
-st.sidebar.header("TF Lite Models")
-display = ("Select a Model", "Created FP-16 Quantized Model", "Created Quantized Model", "Created Dynamic Range Quantized Model")
-options = list(range(len(display)))
-value = st.sidebar.selectbox("Model", options, format_func=lambda x: display[x])
-print(value)
+# st.sidebar.header("TF Lite Models")
+# display = ("Select a Model", "Created FP-16 Quantized Model", "Created Quantized Model", "Created Dynamic Range Quantized Model")
+# options = list(range(len(display)))
+# value = st.sidebar.selectbox("Model", options, format_func=lambda x: display[x])
+# print(value)
+
+tflite_interpreter = tf.lite.Interpreter(model_path='Models/image_classify.tflite')
+    tflite_interpreter.allocate_tensors()
  
-if value == 1:
-    tflite_interpreter = tf.lite.Interpreter(model_path='Models/image_classify.tflite')
-    tflite_interpreter.allocate_tensors()
-if value == 2:
-    tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_int8.tflite')
-    tflite_interpreter.allocate_tensors()
-if value == 3:
-    tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_dynamic.tflite')
-    tflite_interpreter.allocate_tensors()
+# if value == 1:
+#     tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_fp16.tflite')
+#     tflite_interpreter.allocate_tensors()
+# if value == 2:
+#     tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_int8.tflite')
+#     tflite_interpreter.allocate_tensors()
+# if value == 3:
+#     tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_dynamic.tflite')
+#     tflite_interpreter.allocate_tensors()
 # if value == 4:
 #     tflite_interpreter = tf.lite.Interpreter(model_path='Models\created_model_fp16.tflite')
 #     tflite_interpreter.allocate_tensors()
@@ -51,8 +54,6 @@ def get_predictions(input_image):
     tflite_interpreter.invoke()
     tflite_model_prediction = tflite_interpreter.get_tensor(output_details[0]["index"])
     tflite_model_prediction = tflite_model_prediction.squeeze().argmax(axis = 0)
-    print("tflite_model_prediction")
-    print(tflite_model_prediction)
     pred_class = class_names[tflite_model_prediction]
     return pred_class
  
