@@ -2,6 +2,10 @@ import streamlit as st
 import tensorflow as tf
 import os
 import numpy as np
+from pathlib import Path
+
+temp_path = Path(__file__).parent / "tempDir"
+
 class_names = ["buildings", "forest", "glacier", "mountain", "sea", "street"]
  
 ## Page Title
@@ -11,7 +15,7 @@ st.markdown("---")
  
 ## Sidebar
 st.sidebar.header("TF Lite Models")
-display = ("Select a Model","Converted FP-16 Quantized Model", "Converted Integer Quantized Model", "Converted Dynamic Range Quantized Model","Created FP-16 Quantized Model", "Created Quantized Model", "Created Dynamic Range Quantized Model")
+display = ("Select a Model","Created FP-16 Quantized Model", "Created Quantized Model", "Created Dynamic Range Quantized Model")
 options = list(range(len(display)))
 value = st.sidebar.selectbox("Model", options, format_func=lambda x: display[x])
 print(value)
@@ -54,9 +58,9 @@ def get_predictions(input_image):
 ## Input Fields
 uploaded_file = st.file_uploader("Upload a Image", type=["jpg","png", 'jpeg'])
 if uploaded_file is not None:
-    with open(os.path.join("tempDir",uploaded_file.name),"wb") as f:
+    with open(os.path.join(temp_path,uploaded_file.name),"wb") as f:
         f.write(uploaded_file.getbuffer())
-    path = os.path.join("tempDir",uploaded_file.name)
+    path = os.path.join(temp_path,uploaded_file.name)
     img = tf.keras.preprocessing.image.load_img(path , grayscale=False, color_mode='rgb', target_size=(224,224,3), interpolation='nearest')
     st.image(img)
     print(value)
