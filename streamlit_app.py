@@ -21,13 +21,13 @@ value = st.sidebar.selectbox("Model", options, format_func=lambda x: display[x])
 print(value)
  
 if value == 1:
-    tflite_interpreter = tf.lite.Interpreter(model_path='Models\model_fp16.tflite')
+    tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_fp16.tflite')
     tflite_interpreter.allocate_tensors()
 if value == 2:
-    tflite_interpreter = tf.lite.Interpreter(model_path='Models\model_int8.tflite')
+    tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_int8.tflite')
     tflite_interpreter.allocate_tensors()
 if value == 3:
-    tflite_interpreter = tf.lite.Interpreter(model_path='Models\model_dynamic.tflite')
+    tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_dynamic.tflite')
     tflite_interpreter.allocate_tensors()
 # if value == 4:
 #     tflite_interpreter = tf.lite.Interpreter(model_path='Models\created_model_fp16.tflite')
