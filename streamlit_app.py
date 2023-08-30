@@ -19,12 +19,9 @@ display = ("Select a Model", "Created FP-16 Quantized Model", "Created Quantized
 options = list(range(len(display)))
 value = st.sidebar.selectbox("Model", options, format_func=lambda x: display[x])
 print(value)
-
-tflite_interpreter = tf.lite.Interpreter(model_path='Models/image_classify.tflite')
-tflite_interpreter.allocate_tensors()
  
 if value == 1:
-    tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_fp16.tflite')
+    tflite_interpreter = tf.lite.Interpreter(model_path='Models/image_classify.tflite')
     tflite_interpreter.allocate_tensors()
 if value == 2:
     tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_int8.tflite')
