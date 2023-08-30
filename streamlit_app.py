@@ -4,7 +4,7 @@ import os
 import numpy as np
 from pathlib import Path
 
-temp_path = Path(__file__).parent / "tempDir"
+# temp_path = Path(__file__).parent / "tempDir"
 
 class_names = ["buildings", "forest", "glacier", "mountain", "sea", "street"]
  
@@ -58,9 +58,9 @@ def get_predictions(input_image):
 ## Input Fields
 uploaded_file = st.file_uploader("Upload a Image", type=["jpg","png", 'jpeg'])
 if uploaded_file is not None:
-    with open(os.path.join(temp_path,uploaded_file.name),"wb") as f:
+    with open(os.path.join("Models",uploaded_file.name),"wb") as f:
         f.write(uploaded_file.getbuffer())
-    path = os.path.join(temp_path,uploaded_file.name)
+    path = os.path.join("Models",uploaded_file.name)
     img = tf.keras.preprocessing.image.load_img(path , grayscale=False, color_mode='rgb', target_size=(224,224,3), interpolation='nearest')
     st.image(img)
     print(value)
