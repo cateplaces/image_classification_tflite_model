@@ -63,7 +63,7 @@ if uploaded_file is not None:
     with open(os.path.join("Models",uploaded_file.name),"wb") as f:
         f.write(uploaded_file.getbuffer())
     path = os.path.join("Models",uploaded_file.name)
-    img = tf.keras.preprocessing.image.load_img(path , grayscale=False, color_mode='rgb', target_size=(224,224,3), interpolation='nearest')
+    img = tf.keras.preprocessing.image.load_img(path , grayscale=False, color_mode='rgb', target_size=(150,150,3), interpolation='nearest')
     st.image(img)
     print(value)
     # if value == 2 or value == 5:
