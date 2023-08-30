@@ -51,6 +51,8 @@ def get_predictions(input_image):
     tflite_interpreter.invoke()
     tflite_model_prediction = tflite_interpreter.get_tensor(output_details[0]["index"])
     tflite_model_prediction = tflite_model_prediction.squeeze().argmax(axis = 0)
+    print("tflite_model_prediction")
+    print(tflite_model_prediction)
     pred_class = class_names[tflite_model_prediction]
     return pred_class
  
