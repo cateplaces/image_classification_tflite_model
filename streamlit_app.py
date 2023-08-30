@@ -27,7 +27,7 @@ if value == 1:
     tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_fp16.tflite')
     tflite_interpreter.allocate_tensors()
 if value == 2:
-    tflite_interpreter = tf.lite.Interpreter(model_path='Models/image_classify.tflite')
+    tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_int8.tflite')
     tflite_interpreter.allocate_tensors()
 if value == 3:
     tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_dynamic.tflite')
