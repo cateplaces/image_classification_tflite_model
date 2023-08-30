@@ -19,12 +19,15 @@ display = ("Select a Model", "Created FP-16 Quantized Model", "Created Quantized
 options = list(range(len(display)))
 value = st.sidebar.selectbox("Model", options, format_func=lambda x: display[x])
 print(value)
+
+tflite_interpreter = tf.lite.Interpreter(model_path='Models/image_classify.tflite')
+tflite_interpreter.allocate_tensors()
  
 if value == 1:
     tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_fp16.tflite')
     tflite_interpreter.allocate_tensors()
 if value == 2:
-    tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_int8.tflite')
+    tflite_interpreter = tf.lite.Interpreter(model_path='Models/image_classify.tflite')
     tflite_interpreter.allocate_tensors()
 if value == 3:
     tflite_interpreter = tf.lite.Interpreter(model_path='Models/model_dynamic.tflite')
@@ -66,8 +69,7 @@ if uploaded_file is not None:
     img = tf.keras.preprocessing.image.load_img(path , grayscale=False, color_mode='rgb', target_size=(224,224,3), interpolation='nearest')
     st.image(img)
     print(value)
-    if value != 1 or value != 2 or value != 3:
-        value = 2
+    # if value == 2 or value == 5:
     #     img = tf.image.convert_image_dtype(img, tf.uint8)
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)
