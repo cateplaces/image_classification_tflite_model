@@ -20,7 +20,7 @@ st.markdown("---")
 # value = st.sidebar.selectbox("Model", options, format_func=lambda x: display[x])
 # print(value)
 
-tflite_interpreter = tf.lite.Interpreter(model_path='Models/converted_simple_model.tflite')
+tflite_interpreter = tf.lite.Interpreter(model_path='Models/image_classify_model.tflite')
 tflite_interpreter.allocate_tensors()
  
 # if value == 1:
